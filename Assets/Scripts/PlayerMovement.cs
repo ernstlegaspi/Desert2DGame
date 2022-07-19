@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour {
 	BoxCollider2D bc;
 	Rigidbody2D player;
 	Transform player_;
-	float speed = 5f;
+	float speed = 7f;
 	float x, y;
 	float prevX = 0, prevY = -1;
 	bool _canAttack = true;

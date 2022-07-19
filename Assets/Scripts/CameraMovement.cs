@@ -11,7 +11,8 @@ public class CameraMovement : MonoBehaviour {
 		cam = transform;
 	}
 	
-	void Update() {
-		cam.position = player.position + offset;
+	void FixedUpdate() {
+		Vector3 targetPos = new Vector3(Mathf.Clamp(player.position.x, -6.88f, 14.92f), Mathf.Clamp(player.position.y, -8.33f, 8.26f), 1);
+		cam.position = Vector3.Lerp(cam.position, targetPos + offset, 3f * Time.fixedDeltaTime);
 	}
 }
