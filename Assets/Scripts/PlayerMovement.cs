@@ -102,7 +102,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	void pickUpWeapon() {
-		RaycastHit2D hit = Physics2D.BoxCast(bc.bounds.center, bc.bounds.size, 0, Vector3.right * player_.localScale.x, 0.5f, weaponOnGroundMask);
+		RaycastHit2D hit = Physics2D.BoxCast(bc.bounds.center, bc.bounds.size, 0, Vector3.right * player_.localScale.x, 0.8f, weaponOnGroundMask);
 
 		if(Input.GetKeyDown(KeyCode.E)) {
 			if(hit) {

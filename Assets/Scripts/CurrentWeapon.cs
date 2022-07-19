@@ -16,7 +16,6 @@ public class CurrentWeapon : MonoBehaviour {
 	public void dropWeapon(float prevX, float playerLocalScaleX) {
 		if(Input.GetKeyDown(KeyCode.G)) {
 			if(hasWeapon) {
-				Debug.Log("Has Weapon");
 				currentWeapon.transform.rotation = Quaternion.Euler(0, 0, 77);
 				currentWeapon.transform.localScale = new Vector3(prevX < 0 ? 0.7f : -0.7f, 0.7f * playerLocalScaleX, 0.7f);
 				hideWeapon(true, true);
@@ -34,6 +33,14 @@ public class CurrentWeapon : MonoBehaviour {
 	public void hideWeapon(bool spriteHide, bool bcHide) {
 		currentWeapon.GetComponent<SpriteRenderer>().enabled = spriteHide;
 		currentWeapon.GetComponent<BoxCollider2D>().enabled = bcHide;
+	}
+
+	protected void onWeaponBoxCollider() {
+		currentWeapon.GetComponent<BoxCollider2D>().enabled = true;
+	}
+	
+	protected void offWeaponBoxCollider() {
+		currentWeapon.GetComponent<BoxCollider2D>().enabled = false;
 	}
 
 	protected void offScytheAttackAnim() {
