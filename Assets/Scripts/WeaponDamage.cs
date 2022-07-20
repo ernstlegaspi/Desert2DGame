@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponDamage : MonoBehaviour {
+	CurrentWeapon cw;
 	public ParticleSystem particles;
 
 	void Start() {
-		
+		cw = GetComponent<CurrentWeapon>();
 	}
 
 	void Update() {
@@ -15,13 +16,19 @@ public class WeaponDamage : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other) {
 		if(other.tag == "Enemy") {
-			if(--Enemy.enemyHP == 0) {
-				other.gameObject.GetComponent<Animator>().SetTrigger("Death");
-				ParticleSystem particle = Instantiate(particles, other.gameObject.transform.position, Quaternion.identity);
-				particle.Play();
-			}
-			else {
-				other.gameObject.GetComponent<Animator>().SetBool("IsDamaged", true);
+			if(cw.hasWeapon) {
+				Transform t = other.gameObject.transform;
+				Animator goAnim = other.gameObject.GetComponent<Animator>();
+				
+				if(--other.gameObject.GetComponent<Enemy>().enemyHP == 0) {
+					goAnim.SetTrigger("Death");
+					ParticleSystem particle = Instantiate(particles, t.position, Quaternion.identity);
+					particle.Play();
+				}
+				else {
+					other.gameObject.GetComponent<Enemy>()._isHit = false;
+					goAnim.SetBool("IsDamaged", true);
+				}
 			}
 		}
 	}
